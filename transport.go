@@ -121,7 +121,7 @@ func newTransport(key, base string, options ...Option) (*transport, error) {
 		defaultTransport = configured.Clone()
 	}
 	defaultTransport.Proxy = nil
-	t := &transport{sleep: waitRetry, owned: true, key: key, base: strings.TrimRight(base, "/"), http: &http.Client{Transport: defaultTransport}, timeout: 30 * time.Second, retries: 2, agent: "sdk/0.0.0 go/" + strings.TrimPrefix(runtime.Version(), "go")} // x-release-please-version
+	t := &transport{sleep: waitRetry, owned: true, key: key, base: strings.TrimRight(base, "/"), http: &http.Client{Transport: defaultTransport}, timeout: 30 * time.Second, retries: 2, agent: "sdk/1.0.0 go/" + strings.TrimPrefix(runtime.Version(), "go")} // x-release-please-version
 	// Do not inherit environment proxy configuration implicitly.
 	t.http.Transport.(*http.Transport).Proxy = nil
 	for _, opt := range options {

@@ -81,7 +81,7 @@ func NewClient(apiKey string, options ...Option) (*Client, error) {
 		return nil, inputError("INVALID_ARGUMENT", "Invalid client configuration")
 	}
 	agent := "thunder-slip-go"
-	t1.agent = agent + "/0.0.0 go/" + strings.TrimPrefix(runtime.Version(), "go") // x-release-please-version
+	t1.agent = agent + "/1.0.0 go/" + strings.TrimPrefix(runtime.Version(), "go") // x-release-please-version
 	t2.agent = t1.agent
 	c := &Client{v2: t2, v1: t1}
 	c.Verify = &VerifyService{t2}

@@ -196,7 +196,7 @@ func TestQuotaGETIsNotImplicitlySafe(t *testing.T) {
 
 func TestCustomContentTypeCannotReplaceAuthOrUserAgent(t *testing.T) {
 	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		if r.Header.Get("Content-Type") != "multipart/form-data; boundary=fixture" || r.Header.Get("Authorization") != "Bearer hidden-key" || !(strings.HasPrefix(r.Header.Get("User-Agent"), "sdk/") && strings.Contains(r.Header.Get("User-Agent"), " go/1.")) {
+		if r.Header.Get("Content-Type") != "multipart/form-data; boundary=fixture" || r.Header.Get("Authorization") != "Bearer hidden-key" || !strings.HasPrefix(r.Header.Get("User-Agent"), "sdk/") || !strings.Contains(r.Header.Get("User-Agent"), " go/1.") {
 			t.Error("invalid protected headers")
 		}
 		w.Write([]byte(`{}`))

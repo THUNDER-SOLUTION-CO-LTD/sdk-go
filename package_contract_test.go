@@ -20,7 +20,7 @@ func TestPackageDefaultsAndEnvironment(t *testing.T) {
 	}
 	t.Setenv("THUNDER_API_KEY_FILE", path)
 	c, err := NewClient("", WithHTTPClient(&http.Client{Transport: roundTripFunc(func(r *http.Request) (*http.Response, error) {
-		if r.Header.Get("Authorization") != "Bearer fixture-key" || !(strings.HasPrefix(r.Header.Get("User-Agent"), "thunder-slip-go/") && strings.Contains(r.Header.Get("User-Agent"), " go/")) {
+		if r.Header.Get("Authorization") != "Bearer fixture-key" || !strings.HasPrefix(r.Header.Get("User-Agent"), "thunder-slip-go/") || !strings.Contains(r.Header.Get("User-Agent"), " go/") {
 			t.Fatal("request headers")
 		}
 		return &http.Response{StatusCode: 200, Header: http.Header{}, Body: io.NopCloser(strings.NewReader(`{"data":[]}`))}, nil
